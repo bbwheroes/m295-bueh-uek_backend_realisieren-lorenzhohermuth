@@ -224,6 +224,14 @@
             "description": "Unauthorized"
           }
         }
+      },
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
       }
     },
     "/verify": {

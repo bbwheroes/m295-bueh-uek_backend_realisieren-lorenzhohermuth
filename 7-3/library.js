@@ -2,6 +2,8 @@ const express = require("express")
 const swaggerAutogen = require('swagger-autogen')();
 const swaggerUi = require('swagger-ui-express');
 const session = require('express-session')
+const bodyParser = require('body-parser');
+const path = require('path');
 const app = express()
 const port = 3000
 
@@ -21,7 +23,9 @@ swaggerAutogen(outputFile, routes, doc).then(() => {
 
 app.set('trust proxy', 1)
 
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json())
+
 app.use(session({
 	secret: 'supersecret',
 	resave: false,
@@ -268,12 +272,17 @@ app.delete("/lends/:id", (req, res) => {
 })
 
 app.post("/login", (req, res) => {
+	console.log(req.body)
 	if (req.body.user === "zli" && req.body.password === "zli1234") {
 		req.session.token = req.body.user
 		res.sendStatus(200)
 	} else {
 		res.sendStatus(401);
 	}
+})
+
+app.get("/login", (req, res)=> {
+	res.sendFile(path.join(__dirname, '/form.html'));
 })
 
 app.get("/verify", (req, res) => {
