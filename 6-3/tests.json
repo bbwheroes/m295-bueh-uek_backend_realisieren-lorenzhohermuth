@@ -1,0 +1,166 @@
+[
+  {
+    "v": 2,
+    "name": "Lib",
+    "folders": [],
+    "requests": [
+      {
+        "v": "4",
+        "endpoint": "http://localhost:3000/lends/",
+        "name": "Get Lends",
+        "params": [],
+        "headers": [],
+        "method": "GET",
+        "auth": {
+          "authType": "inherit",
+          "authActive": true
+        },
+        "preRequestScript": "",
+        "testScript": "pw.test(\"Response is ok\", () => {\n  pw.expect(pw.response.status).toBe(200);\n});",
+        "body": {
+          "contentType": null,
+          "body": null
+        },
+        "requestVariables": []
+      },
+      {
+        "v": "4",
+        "endpoint": "http://localhost:3000/lends/e89cdd9b-b726-4627-bd6f-bad46a7f9b3a",
+        "name": "Get Specific Lend",
+        "params": [],
+        "headers": [],
+        "method": "GET",
+        "auth": {
+          "authType": "inherit",
+          "authActive": true
+        },
+        "preRequestScript": "",
+        "testScript": "pw.test(\"Response is ok\", () => {\n  pw.expect(pw.response.status).toBe(200);\n});\n\npw.test(\"Returns Correct lend\", () => {\n  pw.expect(pw.response.body.id).toBe(\"e89cdd9b-b726-4627-bd6f-bad46a7f9b3a\")\n})",
+        "body": {
+          "contentType": null,
+          "body": null
+        },
+        "requestVariables": []
+      },
+      {
+        "v": "4",
+        "endpoint": "http://localhost:3000/books",
+        "name": "Get Books",
+        "params": [],
+        "headers": [],
+        "method": "GET",
+        "auth": {
+          "authType": "inherit",
+          "authActive": true
+        },
+        "preRequestScript": "",
+        "testScript": "pw.test(\"Response is ok\", () => {\n  pw.expect(pw.response.status).toBe(200);\n});\n\npw.test(\"Gives back one of the books\", () => {\n  const resElm = pw.response.body\n  const arr = resElm.find(e => e.isbn === \"978-0-553-28826-5\")\n  pw.expect(JSON.stringify(arr)).not.toBe(undefined)\n});",
+        "body": {
+          "contentType": null,
+          "body": null
+        },
+        "requestVariables": []
+      },
+      {
+        "v": "4",
+        "endpoint": "http://localhost:3000/books/978-0-553-28826-5",
+        "name": "Get specific Book",
+        "params": [],
+        "headers": [],
+        "method": "GET",
+        "auth": {
+          "authType": "inherit",
+          "authActive": true
+        },
+        "preRequestScript": "",
+        "testScript": "pw.test(\"Response is ok\", () => {\n  pw.expect(pw.response.status).toBe(200);\n});\n\npw.test(\"Returns Correct Book\", () => {\n  pw.expect(pw.response.body.isbn).toBe(\"978-0-553-28826-5\")\n  \n})",
+        "body": {
+          "contentType": null,
+          "body": null
+        },
+        "requestVariables": []
+      },
+      {
+        "v": "4",
+        "endpoint": "http://localhost:3000/lends/",
+        "name": "Add Lend",
+        "params": [],
+        "headers": [],
+        "method": "POST",
+        "auth": {
+          "authType": "inherit",
+          "authActive": true
+        },
+        "preRequestScript": "",
+        "testScript": "pw.test(\"Response is ok\", () => {\n  pw.expect(pw.response.status).toBe(201);\n});\n\npw.test(\"Is getting added to array\", () => {\n  const resElm = pw.response.body.at(-1)\n  pw.expect(resElm.id).toBe(\"0e538d09-4c1e-4f3e-a40c-d9746e482fdj\")\n})",
+        "body": {
+          "contentType": "application/json",
+          "body": "{\n  \"id\": \"0e538d09-4c1e-4f3e-a40c-d9746e482fdj\",\n  \"customer_id\": \"f22e8a2b-8685-41a8-be38-8fd645390d7d\",\n  \"isbn\": \"978-3-426-30825-7\",\n  \"borrowed_at\": \"2012-04-23T18:25:43.511Z\",\n  \"returned_at\": \"2012-04-23T18:25:43.511Z\"\n}"
+        },
+        "requestVariables": []
+      },
+      {
+        "v": "4",
+        "endpoint": "http://localhost:3000/books",
+        "name": "Add Book",
+        "params": [],
+        "headers": [],
+        "method": "POST",
+        "auth": {
+          "authType": "inherit",
+          "authActive": true
+        },
+        "preRequestScript": "",
+        "testScript": "pw.test(\"Response is ok\", () => {\n  pw.expect(pw.response.status).toBe(201);\n});\n\npw.test(\"Is getting added to array\", () => {\n  const resElm = pw.response.body.at(-1)\n  pw.expect(resElm.isbn).toBe(\"978-0-553-28826-5\")\n})",
+        "body": {
+          "contentType": "application/json",
+          "body": "{\n  \"isbn\": \"978-0-553-28826-5\",\n  \"name\": \"The Hobbit\",\n  \"author\": \"J.R.R. Tolkien\",\n  \"year\": 1937\n}"
+        },
+        "requestVariables": []
+      },
+      {
+        "v": "4",
+        "endpoint": "http://localhost:3000/lends/0e538d09-4c1e-4f3e-a40c-d9746e4826af",
+        "name": "Delete Lend",
+        "params": [],
+        "headers": [],
+        "method": "DELETE",
+        "auth": {
+          "authType": "inherit",
+          "authActive": true
+        },
+        "preRequestScript": "",
+        "testScript": "pw.test(\"Response is ok\", () => {\n  pw.expect(pw.response.status).toBe(200);\n});\n\npw.test(\"Is getting added to array\", () => {\n  const resElm = pw.response.body\n  const arr = resElm.find(e => e.id === \"0e538d09-4c1e-4f3e-a40c-d9746e482fdj\")\n  pw.expect(arr.length).toBe(undefined)\n})",
+        "body": {
+          "contentType": "application/json",
+          "body": "{\n  \"id\": \"0e538d09-4c1e-4f3e-a40c-d9746e482fdj\",\n  \"customer_id\": \"f22e8a2b-8685-41a8-be38-8fd645390d7d\",\n  \"isbn\": \"978-3-426-30825-7\",\n  \"borrowed_at\": \"2012-04-23T18:25:43.511Z\",\n  \"returned_at\": \"2012-04-23T18:25:43.511Z\"\n}"
+        },
+        "requestVariables": []
+      },
+      {
+        "v": "4",
+        "endpoint": "http://localhost:3000/books/978-0-553-28826-5",
+        "name": "Delete Book",
+        "params": [],
+        "headers": [],
+        "method": "DELETE",
+        "auth": {
+          "authType": "inherit",
+          "authActive": true
+        },
+        "preRequestScript": "",
+        "testScript": "pw.test(\"Response is ok\", () => {\n  pw.expect(pw.response.status).toBe(200);\n});\n\npw.test(\"Is getting added to array\", () => {\n  const resElm = pw.response.body\n  const arr = resElm.isbn(e => e.id === \"978-0-553-28826-5\")\n  pw.expect(arr.length).toBe(undefined)\n})",
+        "body": {
+          "contentType": null,
+          "body": ""
+        },
+        "requestVariables": []
+      }
+    ],
+    "headers": [],
+    "auth": {
+      "authType": "none",
+      "authActive": true
+    }
+  }
+]
