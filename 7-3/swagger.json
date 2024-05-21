@@ -1,0 +1,253 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "My Libraray API",
+    "description": "Description",
+    "version": "1.0.0"
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "tags": [
+          "Root"
+        ],
+        "summary": "Redirect to /books",
+        "description": "Redirect to /books for developer exp. ",
+        "responses": {
+          "301": {
+            "description": "Moved Permanently"
+          }
+        }
+      }
+    },
+    "/books": {
+      "get": {
+        "tags": [
+          "Book"
+        ],
+        "summary": "Get all books",
+        "description": "Get all books currently in the library",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Book"
+        ],
+        "summary": "Add one book to Library",
+        "description": "Add one spesific book book.isbn, book.name, book.author and book.year have to be filled in",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "201": {
+            "description": "Created"
+          }
+        }
+      }
+    },
+    "/books/{isbn}": {
+      "get": {
+        "tags": [
+          "Book"
+        ],
+        "summary": "Get spesific books",
+        "description": "Get spesific books currently in the library",
+        "parameters": [
+          {
+            "name": "isbn",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Book"
+        ],
+        "summary": "Replace one book to Library",
+        "description": "Replace one spesific book book.isbn, book.name, book.author and book.year have to be filled in",
+        "parameters": [
+          {
+            "name": "isbn",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "201": {
+            "description": "Created"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Book"
+        ],
+        "summary": "Delete one book to Library",
+        "description": "Delete one book will get hard deleted",
+        "parameters": [
+          {
+            "name": "isbn",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/lends": {
+      "get": {
+        "tags": [
+          "Lend"
+        ],
+        "summary": "Display all Lends",
+        "description": "Get all Lends from Library",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Lend"
+        ],
+        "summary": "Lend a book",
+        "description": "Lend a new book the body has to be filled with all parameters expept returned_at",
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/lends/{id}": {
+      "get": {
+        "tags": [
+          "Lend"
+        ],
+        "summary": "Display spesific Lends",
+        "description": "Get a spesific Lends from Library",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Lend"
+        ],
+        "summary": "Delete a book",
+        "description": "Delet a book from Library",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/login": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "user": {
+                  "example": "any"
+                },
+                "password": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/verify": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/logout": {
+      "delete": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    }
+  }
+}
